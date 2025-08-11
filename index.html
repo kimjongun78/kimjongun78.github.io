@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tautan Bot WhatsApp</title>
+    <!-- Memuat Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Memuat Google Fonts (Inter untuk teks biasa & Noto Naskh Arabic untuk tulisan Arab) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Menggunakan font Inter sebagai default */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Menetapkan gambar latar belakang */
+            background-image: url('http://googleusercontent.com/file_content/1');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Membuat latar belakang tidak ikut scroll */
+        }
+
+        /* Menambahkan lapisan gelap di atas latar belakang agar konten lebih mudah dibaca */
+        .body-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Warna hitam dengan 50% transparansi */
+            z-index: -1;
+        }
+
+        /* Menetapkan font khusus untuk tulisan Arab */
+        .font-arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <!-- Lapisan Gelap untuk Keterbacaan -->
+    <div class="body-overlay fixed top-0 left-0 w-full h-full"></div>
+
+    <!-- Kartu Profil -->
+    <div class="w-full max-w-sm bg-white dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg p-6 text-center">
+        
+        <!-- Foto Profil Placeholder -->
+        <img class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-green-400 dark:border-green-500 shadow-md" 
+             src="https://placehold.co/128x128/28a745/ffffff?text=BOT" 
+             alt="Foto Profil Bot"
+             onerror="this.onerror=null;this.src='https://placehold.co/128x128/cccccc/ffffff?text=Error';">
+        
+        <!-- Nama Bot -->
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white">
+            Bot WhatsApp Saya
+        </h1>
+        
+        <!-- Status Online/Offline -->
+        <div id="status-container" class="flex items-center justify-center gap-2 mt-2 mb-6">
+            <span id="status-dot" class="h-3 w-3 bg-green-500 rounded-full animate-pulse"></span>
+            <span id="status-text" class="text-md font-semibold text-green-600 dark:text-green-400">
+                Online
+            </span>
+        </div>
+
+        <!-- Tombol Hubungi via WhatsApp -->
+        <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20layanan%20Anda." 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="inline-block w-full px-6 py-4 text-lg font-bold text-white bg-green-500 rounded-xl hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 transition-transform transform hover:scale-105 duration-300 shadow-lg">
+            <i class="fab fa-whatsapp mr-2"></i>
+            Hubungi di WhatsApp
+        </a>
+
+        <!-- Pembatas -->
+        <hr class="my-6 border-gray-200 dark:border-gray-600">
+
+        <!-- Bagian Ayat Harian -->
+        <div>
+            <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">Ayat Hari Ini</h2>
+            <blockquote class="text-gray-800 dark:text-gray-200">
+                <!-- Teks Arab -->
+                <p id="ayat-arab" class="font-arabic text-2xl mb-3" dir="rtl">...</p>
+                <!-- Terjemahan -->
+                <p id="ayat-text" class="italic text-sm">Memuat ayat...</p>
+                <!-- Sumber Surah -->
+                <footer id="ayat-surah" class="text-right text-xs text-gray-600 dark:text-gray-400 mt-2 font-semibold"></footer>
+            </blockquote>
+        </div>
+
+    </div>
+
+    <script>
+        // Daftar ayat Al-Quran dengan teks Arab
+        const ayat = [
+            {
+                arab: "لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+                text: "Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya.",
+                surah: "QS. Al-Baqarah: 286"
+            },
+            {
+                arab: "أَلَا بِذِكْرِ ٱللَّهِ تَطْمَئِنُّ ٱلْقُلُوبُ",
+                text: "Ingatlah, hanya dengan mengingati Allah-lah hati menjadi tenteram.",
+                surah: "QS. Ar-Ra'd: 28"
+            },
+            {
+                arab: "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+                text: "Karena sesungguhnya sesudah kesulitan itu ada kemudahan.",
+                surah: "QS. Al-Insyirah: 5"
+            },
+            {
+                arab: "لَا تَقْنَطُوا۟ مِن رَّحْمَةِ ٱللَّهِ",
+                text: "Dan janganlah kamu berputus asa dari rahmat Allah.",
+                surah: "QS. Az-Zumar: 53"
+            },
+            {
+                arab: "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+                text: "Maka nikmat Tuhanmu yang manakah yang kamu dustakan?",
+                surah: "QS. Ar-Rahman: 13"
+            }
+        ];
+
+        // Fungsi untuk menampilkan ayat acak saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            const randomIndex = Math.floor(Math.random() * ayat.length);
+            const randomAyat = ayat[randomIndex];
+
+            document.getElementById('ayat-arab').textContent = randomAyat.arab;
+            document.getElementById('ayat-text').textContent = `"${randomAyat.text}"`;
+            document.getElementById('ayat-surah').textContent = `— ${randomAyat.surah}`;
+        });
+    </script>
+
+</body>
+</html>
+
